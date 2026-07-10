@@ -1,0 +1,29 @@
+{
+  "name": "cnma",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vp run cli#dev",
+    "build": "vp check && vp run -r test && vp run -r build",
+    "format": "vp check --fix",
+    "prepare": "vp config",
+    "release": "pnpm ready && cd packages/cli && pnpm publish",
+    "bump": "bumpp"
+  },
+  "devDependencies": {
+    "bumpp": "catalog:",
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.11.0",
+      "onFail": "download"
+    }
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

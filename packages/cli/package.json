@@ -1,0 +1,56 @@
+{
+  "name": "create-cnma",
+  "version": "0.0.1",
+  "description": "Frontend project scaffolding CLI — interactive project creation with Vite+, React, TanStack Router, Tailwind CSS, and shadcn/ui.",
+  "keywords": [
+    "cli",
+    "create",
+    "react",
+    "scaffold",
+    "shadcn-ui",
+    "tailwindcss",
+    "tanstack-router",
+    "vite"
+  ],
+  "homepage": "https://github.com/wan-kong/cnma",
+  "bugs": {
+    "url": "https://github.com/wan-kong/cnma"
+  },
+  "license": "MIT",
+  "author": "wankong",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wan-kong/cnma.git"
+  },
+  "bin": {
+    "cnma": "dist/index.mjs",
+    "create-cnma": "dist/index.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "vp pack && node ./scripts/copy-templates.mjs",
+    "dev": "vp pack --watch",
+    "test": "vp test",
+    "check": "vp check --fix"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.10.1",
+    "citty": "^0.1.6",
+    "cross-spawn": "^7.0.6",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/cross-spawn": "^6.0.6",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  }
+}
