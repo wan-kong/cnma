@@ -1,5 +1,4 @@
 // oxlint-disable typescript/restrict-template-expressions
-"use client";
 
 import * as React from "react";
 import * as RechartsPrimitive from "recharts";
