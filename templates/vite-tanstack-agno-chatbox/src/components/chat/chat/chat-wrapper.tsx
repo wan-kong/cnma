@@ -1,5 +1,3 @@
-"use client";
-
 import { Chat } from "./chat";
 import { useChat } from "./hooks";
 

@@ -1,5 +1,3 @@
-"use client";
-
 import { EllipsisIcon, MessageSquare, PencilIcon, Trash2Icon } from "lucide-react";
 import {
   DropdownMenu,

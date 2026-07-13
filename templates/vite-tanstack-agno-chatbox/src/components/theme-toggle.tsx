@@ -1,5 +1,3 @@
-"use client";
-
 import { MonitorCog, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 

@@ -1,5 +1,3 @@
-"use client";
-
 import { Check, Clock, Copy, Sparkles, Zap } from "lucide-react";
 import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";

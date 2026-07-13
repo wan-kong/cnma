@@ -31,7 +31,7 @@ export default defineConfig({
     port: 7930,
     proxy: {
       "/api": {
-        target: "https://10.168.66.104/d7dec64f/api/v1/duty/agent/chat/",
+        target: "https://127.0.0.1:7777/",
         changeOrigin: true,
         secure: false,
         rewrite: (p) => p.replace(/^\/api/, ""),

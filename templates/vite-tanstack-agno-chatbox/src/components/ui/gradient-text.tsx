@@ -1,5 +1,3 @@
-"use client";
-
 import { motion, useAnimationFrame, useMotionValue, useTransform } from "motion/react";
 import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";

@@ -1,5 +1,3 @@
-"use client";
-
 import type { FileUIPart, UIMessage } from "ai";
 import { ChevronLeftIcon, ChevronRightIcon, PaperclipIcon, XIcon } from "lucide-react";
 import type { ComponentProps, HTMLAttributes, ReactElement } from "react";

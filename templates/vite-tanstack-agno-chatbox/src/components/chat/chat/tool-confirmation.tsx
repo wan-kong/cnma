@@ -1,5 +1,3 @@
-"use client";
-
 import { CheckIcon, ShieldAlertIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { CodeBlock } from "@/components/ai-elements/code-block";

@@ -1,5 +1,3 @@
-"use client";
-
 import { Reasoning, ReasoningContent, ReasoningTrigger } from "@/components/ai-elements/reasoning";
 import { Markdown } from "../markdown/markdown";
 import type { ChatListItem, OnContinueRun } from "./hooks";
