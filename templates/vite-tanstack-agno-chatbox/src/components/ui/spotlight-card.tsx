@@ -1,5 +1,4 @@
 /** biome-ignore-all lint/a11y/noStaticElementInteractions: need to handle focus*/
-"use client";
 
 import { useRef, useState } from "react";
 import { cn } from "@/lib/utils";

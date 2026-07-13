@@ -1,5 +1,3 @@
-"use client";
-
 import { Code, Lightbulb, MessageSquare, Sparkles } from "lucide-react";
 import { GradientText } from "@/components/ui/gradient-text";
 import { SpotlightCard } from "@/components/ui/spotlight-card";

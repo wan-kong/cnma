@@ -1,12 +1,13 @@
 # Vite + React + TanStack Router + shadcn/ui
 
-基于 Vite+ 工具链的 React SPA 模板，预配置了 TanStack Router（文件路由）、Tailwind CSS v4 和完整的 shadcn/ui 组件库。
+基于 Vite+ 工具链的 React SPA 模板，预配置了 TanStack Router（文件路由）、TanStack Query、统一 Fetch 请求层、Tailwind CSS v4 和完整的 shadcn/ui 组件库。
 
 ## 技术栈
 
 - **[Vite+](https://viteplus.dev)** — 统一前端工具链（构建/Lint/格式化/测试）
 - **[React](https://react.dev)** 19 — UI 框架
 - **[TanStack Router](https://tanstack.com/router)** — 类型安全的文件路由
+- **[TanStack Query](https://tanstack.com/query)** — 服务端状态、缓存与 Mutation 管理
 - **[Tailwind CSS](https://tailwindcss.com)** v4 — 原子化 CSS 框架
 - **[shadcn/ui](https://ui.shadcn.com)** — 可复制的 UI 组件库
 
@@ -36,6 +37,12 @@ src/
 ├── router.tsx            # TanStack Router 配置
 ├── styles.css            # Tailwind CSS 入口
 ├── routeTree.gen.ts      # 自动生成的路由树（勿手动编辑）
+├── api/
+│   ├── client.ts         # HTTP Client 实例与 Fetch 适配器
+│   ├── mock-fetch.ts     # Todo Demo 的本地模拟接口
+│   └── todos.ts          # Todo DTO 与 CRUD 接口
+├── queries/
+│   └── todos.ts          # Query Key、查询配置与 Mutation
 ├── routes/
 │   ├── __root.tsx        # 根布局
 │   └── index.tsx         # 首页
@@ -43,8 +50,20 @@ src/
 │   └── ui/               # shadcn/ui 组件
 ├── hooks/                # 自定义 Hooks
 └── lib/
+    ├── http.ts           # 统一 Fetch 请求封装
+    ├── http.test.ts      # HTTP 层单元测试
+    ├── query-client.ts   # TanStack Query 全局配置
     └── utils.ts          # cn() 等工具函数
 ```
+
+## 请求与 Query 分层
+
+- `lib/http.ts` 只处理协议层能力：Base URL、查询参数、JSON/FormData、超时、取消请求、响应解析与 `HttpError`。
+- `api/*.ts` 定义领域 DTO 和接口函数，不在组件中拼接 URL。
+- `queries/*.ts` 定义稳定的 Query Key、缓存策略、Mutation 以及失效范围。
+- `routes` 和组件只负责交互与渲染，不直接调用 `fetch`。
+
+Todo Demo 默认向 `createHttpClient` 注入 `mockFetch`，数据保存在 `localStorage`，无需启动后端。接入真实接口时，在 `src/api/client.ts` 中删除 `fetch: mockFetch`，并按需配置 `baseUrl` 即可。
 
 ## 路由
 

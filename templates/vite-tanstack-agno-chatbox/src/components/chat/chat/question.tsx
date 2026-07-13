@@ -1,5 +1,3 @@
-"use client";
-
 import { Markdown } from "../markdown/markdown";
 import type { ChatListItem } from "./hooks";
 import { OperationTools } from "./operation-tools";

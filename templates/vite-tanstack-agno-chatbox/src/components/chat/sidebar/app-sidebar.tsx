@@ -1,5 +1,3 @@
-"use client";
-
 import { useCallback, useMemo, useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useSessionContext } from "@/components/provider/session-provider";

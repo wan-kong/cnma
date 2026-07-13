@@ -1,5 +1,3 @@
-"use client";
-
 import { BrainIcon, ChevronDownIcon } from "lucide-react";
 import type { ComponentProps, ReactNode } from "react";
 import { createContext, memo, useCallback, useContext, useEffect, useRef, useState } from "react";
@@ -202,9 +200,7 @@ export const ReasoningContent = memo(({ className, children, ...props }: Reasoni
     )}
     {...props}
   >
-    <Streamdown className="typeset typeset-docs max-w-[37em]" {...props}>
-      {children}
-    </Streamdown>
+    <Streamdown className="typeset typeset-docs max-w-[37em]">{children}</Streamdown>
   </CollapsibleContent>
 ));
 
