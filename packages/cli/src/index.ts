@@ -7,7 +7,7 @@ const mainCommand = defineCommand({
   meta: {
     name: "cnma",
     version: pkg.version,
-    description: "Create a new VitePlus project — fast, interactive, and opinionated.",
+    description: "Create a project from an opinionated template.",
   },
   args: createArgs,
   run: runCreateCommand,

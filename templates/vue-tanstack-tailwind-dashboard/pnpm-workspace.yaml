@@ -1,0 +1,14 @@
+packages: []
+
+allowBuilds:
+  maplibre-gl: true
+  vue-demi: true
+minimumReleaseAgeExclude:
+  - "@wankong/shadcn-animate@0.0.1"
+overrides:
+  vite: "npm:@voidzero-dev/vite-plus-core@0.2.4"
+peerDependencyRules:
+  allowAny:
+    - vite
+  allowedVersions:
+    vite: "*"

@@ -1,0 +1,15 @@
+.DS_Store
+.git
+.pnpm-store
+.vite-hooks
+.vscode
+dist
+node_modules
+
+.env
+.env.*
+
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*

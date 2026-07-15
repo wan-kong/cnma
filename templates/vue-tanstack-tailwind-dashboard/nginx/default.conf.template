@@ -1,0 +1,54 @@
+server {
+  listen 80;
+  listen [::]:80;
+  server_name _;
+
+  index index.html;
+  client_max_body_size 20m;
+  add_header Referrer-Policy "no-referrer" always;
+
+  gzip on;
+  gzip_vary on;
+  gzip_min_length 1024;
+  gzip_types
+  application/javascript
+  application/json
+  application/xml
+  image/svg+xml
+  text/css
+  text/javascript
+  text/plain
+  text/xml;
+
+  location = /healthz {
+    access_log off;
+    default_type text/plain;
+    return 200 "ok\n";
+  }
+
+  location ^~ ${APP_BASE_PATH}/api/ {
+    proxy_pass ${BACKEND_URL}/api/;
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    proxy_connect_timeout 600s;
+    proxy_send_timeout 600s;
+    proxy_read_timeout 600s;
+  }
+
+  location ^~ ${APP_BASE_PATH}/assets/ {
+    root /usr/share/nginx/html;
+    access_log off;
+    expires 1y;
+    add_header Cache-Control "public, immutable";
+  }
+
+  location ${APP_BASE_PATH}/ {
+    root /usr/share/nginx/html;
+    try_files $uri $uri/ ${APP_BASE_PATH}/index.html;
+    add_header Cache-Control "no-cache";
+  }
+}

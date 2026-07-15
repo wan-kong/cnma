@@ -14,9 +14,16 @@ import {
 } from "../src/lib/create-flow.ts";
 import type { CommandSpec } from "../src/types.ts";
 import { normalizeCreateArgs } from "../src/commands/create.ts";
+import { getTemplate, TEMPLATES } from "../src/lib/templates.ts";
 
 test("uses the requested interactive defaults", () => {
   expect(DEFAULT_PROJECT_NAME).toBe("cnma-app");
+  expect(DEFAULT_TEMPLATE).toBe("vite-react-tanstack-router");
+});
+
+test("discovers the Vue dashboard while keeping React as the default", () => {
+  expect(TEMPLATES.map((template) => template.id)).toContain("vue-tanstack-tailwind-dashboard");
+  expect(getTemplate("vue-tanstack-tailwind-dashboard")?.hint).toContain("Vue 3 dashboard");
   expect(DEFAULT_TEMPLATE).toBe("vite-react-tanstack-router");
 });
 
