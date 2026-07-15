@@ -1,6 +1,6 @@
 {
   "name": "create-cnma",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Frontend project scaffolding CLI",
   "keywords": [
     "cli",
