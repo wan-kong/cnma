@@ -23,8 +23,8 @@
     "url": "git+https://github.com/wan-kong/cnma.git"
   },
   "bin": {
-    "cnma": "dist/index.mjs",
-    "create-cnma": "dist/index.mjs"
+    "cnma": "./dist/index.mjs",
+    "create-cnma": "./dist/index.mjs"
   },
   "files": [
     "dist"
