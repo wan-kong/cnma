@@ -24,7 +24,7 @@ jobs:
 
       - run: vp install --frozen-lockfile
 
-      - run: vp run ready
+      - run: vp run build
 
       - run: npm publish
         working-directory: packages/cli
