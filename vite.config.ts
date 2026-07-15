@@ -7,6 +7,7 @@ export default defineConfig({
   fmt: {
     ignorePatterns: [
       "templates/**/src/routeTree.gen.ts",
+      "templates/**/typed-router.d.ts",
       "templates/**/src/lib/sdk/agno/gen/**",
       "templates/**/src/typeset.css",
       "templates/**/pnpm-lock.yaml",
@@ -17,6 +18,9 @@ export default defineConfig({
     jsPlugins: [{ name: "vite-plus", specifier: "vite-plus/oxlint-plugin" }],
     rules: { "vite-plus/prefer-vite-plus-imports": "error" },
     options: { typeAware: true, typeCheck: true },
+  },
+  test: {
+    exclude: ["**/node_modules/**", "**/.git/**", "**/dist/**"],
   },
   run: {
     cache: true,

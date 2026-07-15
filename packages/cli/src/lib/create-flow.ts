@@ -21,7 +21,7 @@ import { getSkillsInstallCommand } from "./skills.ts";
 import { getTemplate, TEMPLATES } from "./templates.ts";
 
 export const DEFAULT_PROJECT_NAME = "cnma-app";
-export const DEFAULT_TEMPLATE = TEMPLATES[0].id;
+export const DEFAULT_TEMPLATE = TEMPLATES[0]?.id;
 
 export function validateProjectName(value: string): string | undefined {
   const name = value.trim();

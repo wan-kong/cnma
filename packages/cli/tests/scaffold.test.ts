@@ -20,11 +20,14 @@ test("scaffoldTemplate creates a standalone project from the root template", () 
     const manifest = JSON.parse(fs.readFileSync(path.join(targetDir, "package.json"), "utf8")) as {
       name: string;
       dependencies: Record<string, string>;
+      devDependencies: Record<string, string>;
     };
     expect(manifest.name).toBe("my-awesome-app");
-    expect(Object.values(manifest.dependencies).some((version) => version === "catalog:")).toBe(
-      false,
-    );
+    expect(
+      Object.values({ ...manifest.dependencies, ...manifest.devDependencies }).some((version) =>
+        version.startsWith("catalog:"),
+      ),
+    ).toBe(false);
     expect(fs.readFileSync(path.join(targetDir, "index.html"), "utf8")).toContain(
       "<title>my-awesome-app</title>",
     );
@@ -36,6 +39,46 @@ test("scaffoldTemplate creates a standalone project from the root template", () 
       "legacy-peer-deps=true",
     );
     expect(fs.existsSync(path.join(targetDir, "src/components/ui/button.tsx"))).toBe(true);
+  } finally {
+    fs.rmSync(targetDir, { recursive: true, force: true });
+  }
+});
+
+test("scaffoldTemplate creates the standalone Vue dashboard", () => {
+  const targetDir = createTempDir();
+  try {
+    scaffoldTemplate({
+      template: "vue-tanstack-tailwind-dashboard",
+      targetDir,
+      projectName: "team-dashboard",
+    });
+
+    const manifest = JSON.parse(fs.readFileSync(path.join(targetDir, "package.json"), "utf8")) as {
+      name: string;
+      dependencies: Record<string, string>;
+      devDependencies: Record<string, string>;
+    };
+    expect(manifest.name).toBe("team-dashboard");
+    expect(
+      Object.values({ ...manifest.dependencies, ...manifest.devDependencies }).some((version) =>
+        version.startsWith("catalog:"),
+      ),
+    ).toBe(false);
+    expect(fs.readFileSync(path.join(targetDir, "index.html"), "utf8")).toContain(
+      "<title>team-dashboard</title>",
+    );
+    expect(fs.readFileSync(path.join(targetDir, ".env.example"), "utf8")).toContain(
+      'VITE_GLOBAL_APP_TITLE="team-dashboard"',
+    );
+    expect(fs.readFileSync(path.join(targetDir, "Makefile"), "utf8")).toContain(
+      "IMAGE ?= team-dashboard",
+    );
+    expect(fs.existsSync(path.join(targetDir, ".gitignore"))).toBe(true);
+    expect(fs.existsSync(path.join(targetDir, "_gitignore"))).toBe(false);
+    expect(fs.existsSync(path.join(targetDir, "skills-lock.json"))).toBe(true);
+    expect(fs.existsSync(path.join(targetDir, "Dockerfile"))).toBe(true);
+    expect(fs.existsSync(path.join(targetDir, "nginx/default.conf.template"))).toBe(true);
+    expect(fs.existsSync(path.join(targetDir, "src/components/ui/button/Button.vue"))).toBe(true);
   } finally {
     fs.rmSync(targetDir, { recursive: true, force: true });
   }

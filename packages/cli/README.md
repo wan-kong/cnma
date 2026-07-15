@@ -112,6 +112,12 @@ resolveProjectName → confirmTargetDirectory → resolveTemplate
 
 模板中的文本文件支持 `__PROJECT_NAME__` 变量替换。构建时 `copy-templates.mjs` 会自动将其复制到 `dist/templates/`。
 
+当前内置模板：
+
+- `vite-react-tanstack-router`（默认）
+- `vite-tanstack-agno-chatbox`
+- `vue-tanstack-tailwind-dashboard`
+
 ## 开发
 
 ```bash

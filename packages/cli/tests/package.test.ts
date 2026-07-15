@@ -34,12 +34,35 @@ test("template packaging copies required files and excludes generated directorie
     );
     expect(result.status, result.stderr).toBe(0);
 
-    const templateDir = path.join(destination, "vite-react-tanstack-router");
-    expect(fs.existsSync(path.join(templateDir, "skills-lock.json"))).toBe(true);
-    expect(fs.existsSync(path.join(templateDir, "_gitignore"))).toBe(true);
-    expect(fs.existsSync(path.join(templateDir, "_npmrc"))).toBe(true);
-    for (const excluded of ["node_modules", ".tanstack", ".agents", ".vite-hooks", ".git"]) {
-      expect(fs.existsSync(path.join(templateDir, excluded))).toBe(false);
+    const reactTemplateDir = path.join(destination, "vite-react-tanstack-router");
+    expect(fs.existsSync(path.join(reactTemplateDir, "skills-lock.json"))).toBe(true);
+    expect(fs.existsSync(path.join(reactTemplateDir, "_gitignore"))).toBe(true);
+    expect(fs.existsSync(path.join(reactTemplateDir, "_npmrc"))).toBe(true);
+
+    const vueTemplateDir = path.join(destination, "vue-tanstack-tailwind-dashboard");
+    for (const required of [
+      "skills-lock.json",
+      "_gitignore",
+      "Dockerfile",
+      "Makefile",
+      "docker-compose.yml",
+      "nginx/default.conf.template",
+      "src/components/ui/button/Button.vue",
+    ]) {
+      expect(fs.existsSync(path.join(vueTemplateDir, required))).toBe(true);
+    }
+
+    for (const templateDir of [reactTemplateDir, vueTemplateDir]) {
+      for (const excluded of [
+        "node_modules",
+        ".tanstack",
+        "dist",
+        ".agents",
+        ".vite-hooks",
+        ".git",
+      ]) {
+        expect(fs.existsSync(path.join(templateDir, excluded))).toBe(false);
+      }
     }
   } finally {
     fs.rmSync(destination, { recursive: true, force: true });

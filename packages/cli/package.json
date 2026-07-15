@@ -1,16 +1,18 @@
 {
   "name": "create-cnma",
   "version": "0.0.1",
-  "description": "Frontend project scaffolding CLI — interactive project creation with Vite+, React, TanStack Router, Tailwind CSS, and shadcn/ui.",
+  "description": "Frontend project scaffolding CLI",
   "keywords": [
     "cli",
     "create",
+    "dashboard",
     "react",
     "scaffold",
     "shadcn-ui",
     "tailwindcss",
     "tanstack-router",
-    "vite"
+    "vite",
+    "vue"
   ],
   "homepage": "https://github.com/wan-kong/cnma",
   "bugs": {

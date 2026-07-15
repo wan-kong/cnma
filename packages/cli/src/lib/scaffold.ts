@@ -146,6 +146,7 @@ function replaceTemplateVars(content: string, vars: Record<string, string>): str
 }
 
 function isTextFile(filename: string): boolean {
+  if (["Dockerfile", "Makefile"].includes(filename)) return true;
   return [
     ".json",
     ".ts",
@@ -160,5 +161,7 @@ function isTextFile(filename: string): boolean {
     ".svg",
     ".txt",
     ".gitignore",
+    ".example",
+    ".template",
   ].some((extension) => filename.endsWith(extension));
 }

@@ -1,18 +1,18 @@
 # create-cnma
 
-前端项目脚手架。一行命令即可创建预配置好 Vite+、React、TanStack Router、Tailwind CSS 和 shadcn/ui 的前端项目。
+前端项目脚手架。一行命令即可创建预配置好 Vite+ 的 React 或 Vue 前端项目。
 
 ## 特性
 
 - 🚀 **零配置启动** — 交互式选择模板，自动安装依赖和项目集成
-- 🎨 **开箱即用** — 内置 Vite+、React 19、TanStack Router、Tailwind CSS v4、shadcn/ui
+- 🎨 **开箱即用** — 内置 React/TanStack Router 与 Vue/Pinia 管理后台模板
 - 🛠 **标准化工具链** — 统一使用 [Vite+](https://viteplus.dev) 管理构建、测试、Lint、格式化
 - 🔧 **Git 集成** — 可选初始化 Git 仓库并安装 Vite+ pre-commit hook
 - 📦 **模板系统** — 自动发现 `templates/` 目录下的模板，按 `package.json` 描述展示
 
 ## 前提条件
 
-- **Node.js** >= 22.18.0
+- **Node.js** >= 24
 - **pnpm** >= 11.11.0（如果未安装，Vite+ 会自动下载）
 
 ## 使用
@@ -44,6 +44,9 @@ cnma my-app --yes
 # 在 my-app 目录下指定模板，跳过确认
 cnma my-app --template vite-react-tanstack-router --yes
 
+# 创建 Vue 管理后台模板
+cnma my-dashboard --template vue-tanstack-tailwind-dashboard --yes
+
 # 强制覆盖已有目录
 cnma my-app --force
 ```
@@ -60,9 +63,11 @@ cnma my-app --force
 
 ### 可用模板
 
-| 模板 ID                      | 技术栈                                                          |
-| ---------------------------- | --------------------------------------------------------------- |
-| `vite-react-tanstack-router` | Vite + React 19 + TanStack Router + Tailwind CSS v4 + shadcn/ui |
+| 模板 ID                              | 技术栈                                                                               |
+| ------------------------------------ | ------------------------------------------------------------------------------------ |
+| `vite-react-tanstack-router`（默认） | React 19 + TanStack Router + Tailwind CSS 4 + shadcn/ui                              |
+| `vite-tanstack-agno-chatbox`         | React + TanStack Router + Agno Chat SDK                                              |
+| `vue-tanstack-tailwind-dashboard`    | Vue 3 + Vue Router + Pinia Colada + TanStack Vue Table + Tailwind CSS 4 + shadcn-vue |
 
 模板通过 `templates/` 目录自动发现。添加新模板只需在 `templates/` 下新建目录，放入 `package.json` 即可。
 
@@ -89,7 +94,9 @@ cnma/
 │       │   └── copy-templates.mjs   # 构建时将模板复制到 dist/
 │       └── tests/
 ├── templates/
-│   └── vite-react-tanstack-router/  # 默认模板
+│   ├── vite-react-tanstack-router/  # 默认模板
+│   ├── vite-tanstack-agno-chatbox/  # Agno Chat 模板
+│   └── vue-tanstack-tailwind-dashboard/ # Vue 管理后台模板
 └── vite.config.ts               # 根 Vite+ 配置
 ```
 
@@ -99,28 +106,28 @@ cnma/
 
 ```bash
 # 安装依赖
-pnpm install
+vp install
 ```
 
 推荐在 VS Code 中安装推荐的扩展包（`.vscode/extensions.json`）。
 
 ### 常用命令
 
-| 命令              | 说明                         |
-| ----------------- | ---------------------------- |
-| `pnpm dev`        | 监听 CLI 源码变化并重新构建  |
-| `vp check`        | 格式化 + Lint + 类型检查     |
-| `vp check --fix`  | 自动修复格式和 Lint 问题     |
-| `vp run -r test`  | 运行所有工作区的测试         |
-| `vp run -r build` | 构建所有工作区               |
-| `pnpm ready`      | 一站式：check → test → build |
-| `pnpm release`    | ready + 发布 CLI 包          |
+| 命令                                     | 说明                        |
+| ---------------------------------------- | --------------------------- |
+| `pnpm dev`                               | 监听 CLI 源码变化并重新构建 |
+| `vp check`                               | 格式化 + Lint + 类型检查    |
+| `vp check --fix`                         | 自动修复格式和 Lint 问题    |
+| `vp run -r test`                         | 运行所有工作区的测试        |
+| `vp run -r build`                        | 构建所有工作区              |
+| `vp check && vp test && vp run -r build` | 完整验证                    |
+| `pnpm release`                           | ready + 发布 CLI 包         |
 
 ### 本地测试 CLI
 
 ```bash
 # 构建 CLI
-pnpm ready
+vp check && vp test && vp run -r build
 
 # 直接用 node 运行
 node packages/cli/dist/index.mjs my-test-app --yes
@@ -178,8 +185,8 @@ checkout → pnpm install → check + test + build → pnpm publish
 ## 发布前检查清单
 
 - [ ] **版本号** — `package.json` 和 `packages/cli/package.json` 中的 `version` 已更新
-- [ ] **依赖检查** — `pnpm install` 无报错，无 outdated 关键依赖
-- [ ] **质量门禁** — `pnpm ready`（check → test → build）全部通过
+- [ ] **依赖检查** — `vp install` 无报错，无 outdated 关键依赖
+- [ ] **质量门禁** — `vp check && vp test && vp run -r build` 全部通过
 - [ ] **模板完整** — `packages/cli/dist/templates/` 包含正确的模板文件
 - [ ] **bin 入口** — `packages/cli/dist/index.mjs` 存在且第一行为 `#!/usr/bin/env node`
 - [ ] **files 字段** — `packages/cli/package.json` 的 `files` 包含 `dist`
